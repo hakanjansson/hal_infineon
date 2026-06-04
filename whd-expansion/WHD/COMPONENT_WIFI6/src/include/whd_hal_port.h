@@ -265,7 +265,6 @@ typedef cyhal_transfer_t whd_hal_sdio_host_transfer_type_t;
 #include HAL_SYSPM_H
 #endif /* defined(COMPONENT_CAT5) && !defined(WHD_DISABLE_PDS) */
 
-extern whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config);
 extern whd_result_t whd_hal_gpio_register_callback(whd_oob_config_t* oob_config, whd_bool_t register_action, whd_hal_gpio_event_callback_t callback, void* callback_arg);
 extern void whd_hal_gpio_enable_event(whd_oob_config_t* oob_config, whd_bool_t enable);
 #if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE)
@@ -274,6 +273,11 @@ extern void whd_hal_sdio_enable_event(whd_sdio_t* sdio_obj, whd_bool_t enable);
 
 
 #endif /* !defined(WHD_USE_CUSTOM_HAL_IMPL) && ((CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) || (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)) */
+
+/* Called on all platforms regardless of HAL implementation; each HAL must provide a definition. */
+#if (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SDIO_INTERFACE) || (CYBSP_WIFI_INTERFACE_TYPE == CYBSP_SPI_INTERFACE)
+extern whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config);
+#endif
 
 #ifdef __cplusplus
 } /* extern "C" */

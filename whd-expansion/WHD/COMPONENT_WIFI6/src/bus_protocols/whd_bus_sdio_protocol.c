@@ -157,13 +157,6 @@ static whd_result_t whd_bus_sdio_write_wifi_nvram_image(whd_driver_t whd_driver)
 *             Global Function definitions
 ******************************************************/
 
-#if defined(WHD_ZEPHYR) && defined(WHD_USE_CUSTOM_HAL_IMPL)
-whd_bool_t whd_hal_is_oob_pin_avaliable(const whd_oob_config_t* oob_config)
-{
-    return !((uint32_t)(oob_config->host_oob_pin) == WHD_NC_PIN_VALUE);
-}
-#endif
-
 whd_result_t whd_bus_sdio_attach(whd_driver_t whd_driver, whd_sdio_config_t *whd_sdio_config, whd_sdio_t *sdio_obj)
 {
     struct whd_bus_info *whd_bus_info;
